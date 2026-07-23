@@ -1,0 +1,55 @@
+name: EC2 CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Frontend Dependencies
+        run: npm install
+        working-directory: .
+
+      - name: Build Frontend
+        run: npm run build
+        working-directory: .
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-dist
+          path: dist/
+
+  deploy:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build-dist
+          path: dist/
+
+      - name: Deploy to EC2 via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            cd /home/ubuntu/numberbond
+            git pull origin main
+            rm -rf /var/www/numberbond.amilhasbala.com/html/*
+            cp -r dist/* /var/www/numberbond.amilhasbala.com/html/
