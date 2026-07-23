@@ -84,6 +84,9 @@ h1 {
 }
 
 .part input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   width: 45px;
   height: 45px;
   font-size: 1.5rem;
