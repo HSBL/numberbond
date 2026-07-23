@@ -49,7 +49,18 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: 22
           script: |
+            # Load environment variables (NVM / Node path)
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            export PATH=$PATH:/usr/local/bin:~/.nvm/versions/node/$(ls ~/.nvm/versions/node 2>/dev/null | tail -n 1)/bin
+
             cd /home/ubuntu/numberbond
             git pull origin main
+
+            # Run npm commands
+            npm install
+            npm run build
+
+            # Move dist files to web server directory
             rm -rf /var/www/numberbond.amilhasbala.com/html/*
             cp -r dist/* /var/www/numberbond.amilhasbala.com/html/
