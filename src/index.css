@@ -1,4 +1,19 @@
-body {
-  margin: 0;
-  padding: 0;
+@import "tailwindcss";
+
+@theme {
+  --color-candy-pink: #FF6B9D;
+  --color-candy-purple: #C44DFF;
+  --color-candy-blue: #4DC9FF;
+  --color-candy-teal: #2DD4BF;
+  --color-candy-green: #4ADE80;
+  --color-candy-yellow: #FBBF24;
+  --color-candy-orange: #FB923C;
+  --color-candy-red: #F87171;
+  --color-soft-bg: #FFF5F7;
+  --color-soft-card: #FFFFFF;
+  --color-soft-sidebar: #6366F1;
+  --color-soft-sidebar-dark: #4F46E5;
+  --color-soft-text: #334155;
+  --color-soft-muted: #94A3B8;
+  --font-kid: 'Nunito', 'Segoe UI', sans-serif;
 }
