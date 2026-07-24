@@ -232,8 +232,11 @@ function App() {
           <h1 className="text-4xl font-extrabold bg-gradient-to-r from-candy-pink via-candy-purple to-candy-blue bg-clip-text text-transparent mb-1">
             Number Bond Practice
           </h1>
-          <p className="text-soft-muted mb-6 text-sm">
+          <p className="text-soft-muted mb-3 text-sm">
             Fill in the missing numbers, then click "Check Answers"! 🎯
+          </p>
+          <p className="text-soft-text mb-6 text-sm font-semibold bg-candy-yellow/20 border border-candy-yellow/40 rounded-2xl px-4 py-2 inline-block">
+            👆 Tap on a number box or press Enter to make it bigger by 1!
           </p>
 
           <div className="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] gap-5 mb-8">
